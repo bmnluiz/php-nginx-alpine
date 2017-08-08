@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-MAINTAINER Juliano Petronetto <juliano@petronetto.com.br>
+MAINTAINER Luiz Mendonça <bmn.luiz@gmail.com>
 
 # Install packages
 RUN apk --update add --no-cache \
@@ -14,8 +14,8 @@ RUN apk --update add --no-cache \
         libjpeg-turbo \
         freetype-dev \
         libpng-dev \
-        nodejs \
-        git \
+ #       nodejs \
+ #       git \
         php7 \
         php7-dom \
         php7-fpm \
@@ -24,8 +24,8 @@ RUN apk --update add --no-cache \
         php7-opcache \
         php7-pdo \
         php7-pdo_mysql \
-        php7-pdo_pgsql \
-        php7-pdo_sqlite \
+ #       php7-pdo_pgsql \
+ #       php7-pdo_sqlite \
         php7-xml \
         php7-phar \
         php7-openssl \
@@ -35,6 +35,9 @@ RUN apk --update add --no-cache \
         php7-session \
         php7-gd \
         php7-zlib \
+        jpegoptim \
+        pngquant \
+        optipng \
     && rm -rf /var/cache/apk/*
 
 # Configuring timezones
@@ -43,7 +46,7 @@ RUN echo "America/Sao_Paulo" >  /etc/timezone
 RUN apk del tzdata && rm -rf /var/cache/apk/*
 
 # Creating symbolic link to php
-RUN ln -s /usr/bin/php7 /usr/bin/php
+# RUN ln -s /usr/bin/php7 /usr/bin/php
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
